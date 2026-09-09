@@ -1,19 +1,10 @@
 name: Build container and push to docker
 on: push
 
-permissions:
-    contents: read
-    pages: write
-    id-token: write
-
 jobs:
     npm-build:
         name: npm-build
         runs-on: ubuntu-latest
-
-        environment:
-            name: github-pages
-            url: ${{ steps.deploy-pages.outputs.page_url }}
         
         steps:
             - name: Read repo
