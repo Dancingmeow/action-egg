@@ -1,4 +1,4 @@
-name: Build container and push to docker
+name: Build container and push to docker hub
 on: push
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
                 password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
             - name: Build and push to docker
-              uses: docker/build-push-actions@v5
+              uses: docker/build-push-action@v5
               with:
                 push: true
                 tags: dancingmeow/react-app:latest
