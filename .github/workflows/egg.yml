@@ -1,3 +1,4 @@
+name: Deploy React demo
 on: push
 
 permissions:
