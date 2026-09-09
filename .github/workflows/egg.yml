@@ -1,4 +1,4 @@
-name: Deploy React demo
+name: Build container and push to docker
 on: push
 
 permissions:
@@ -19,16 +19,14 @@ jobs:
             - name: Read repo
               uses: actions/checkout@v4
 
-            - name: Install dependencies & Build project
-              run: |
-                npm install
-                npm run build
-            
-            - name: Upload Pages artifact
-              uses: actions/upload-pages-artifact@v3
+            - name: Login to DockerHub
+              uses: docker/login-action@v3
               with:
-                path: ./build
+                username: ${{ secrets.DOCKER_HUB_USERNAME }}
+                password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-            - name: Deploy github pages
-              id: deploy-pages
-              uses: actions/deploy-pages@v4
+            - name: Build and push to docker
+              uses: docker/build-push-actions@v5
+              with:
+                push: true
+                tags: dancingmeow/react-app:latest
